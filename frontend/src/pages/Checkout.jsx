@@ -19,42 +19,48 @@ export default function Checkout() {
   const [paymentCompleted, setPaymentCompleted] = useState(false)
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
 
-    try {
-      const orderData = {
-        customer: {
-          name: formData.name,
-          phone: formData.phone,
-          address: formData.address
-        },
-        items: cart.map(item => ({
-          productId: item._id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity
-        })),
-        total: total,
-        upiTransactionId: formData.upiTransactionId
-      }
+  try {
+    const orderData = {
+      customer: {
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address
+      },
+      items: cart.map(item => ({
+        productId: item._id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity
+      })),
+      total: total,
+      upiTransactionId: formData.upiTransactionId  // ← ADD THIS LINE!
 
-      await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData)
-      
-      toast.success('✅ Order placed successfully! Check admin panel.', {
-        duration: 5000,
-        style: { background: '#D4F4DD', color: '#333' }
-      })
-      
-      clearCart()
-      setPaymentCompleted(true)
-    } catch (error) {
-      toast.error('❌ Something went wrong. Please try again.')
-    } finally {
-      setLoading(false)
     }
+
+    console.log('Sending order:', orderData); // Debug
+
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData)
+    
+    console.log('Order success:', response.data); // Debug
+    
+    toast.success('✅ Order placed successfully! Check admin panel.', {
+      duration: 5000,
+      style: { background: '#D4F4DD', color: '#333' }
+    })
+    
+    clearCart()
+    setPaymentCompleted(true)
+  } catch (error) {
+    console.error('Order error:', error.response?.data || error.message); // Debug
+    toast.error('❌ Something went wrong. Please try again.')
+  } finally {
+    setLoading(false)
   }
+}
 
   if (paymentCompleted) {
     return (
@@ -138,25 +144,42 @@ export default function Checkout() {
               </div>
 
               <div>
-                {/* upiTransactionId come here again
-                ......................
-                .......................
-                ..........................
-                ...............................
-                */}
-                <label className="block text-lg font-semibold mb-3">UPI Transaction ID</label>
-                <p className="text-sm text-gray-500 mb-3">
-                  Complete payment to <strong>yourupiid@paytm</strong> or <strong>yourupiid@phonepe</strong> then enter transaction ID
-                </p>
-                <input
-                  type="text"
-                  required
-                  value={formData.upiTransactionId}
-                  onChange={(e) => setFormData({...formData, upiTransactionId: e.target.value})}
-                  className="w-full p-5 border-2 border-crochet-pink/30 rounded-2xl focus:border-crochet-pink focus:outline-none focus:ring-4 focus:ring-crochet-pink/20 text-xl"
-                  placeholder="TXN123456789"
-                />
-              </div>
+  <label className="block text-xl font-bold mb-4 text-red-600 flex items-center gap-2">
+    💳 UPI Transaction ID <span className="text-sm">(MANDATORY)</span>
+  </label>
+  <div className="p-4 mb-4 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-2xl">
+    <div className="flex items-center gap-3 mb-3 p-3 bg-yellow-100 rounded-xl">
+      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+      <p className="text-sm font-medium text-gray-800">
+        <strong>Step 1:</strong> Pay to <span className="font-bold text-lg">yourupi@paytm</span>
+      </p>
+    </div>
+    <p className="text-sm text-gray-700 mb-4">
+      <strong>Step 2:</strong> Enter EXACT Transaction ID from your UPI app
+    </p>
+    <div className="grid grid-cols-2 gap-3 text-xs bg-gray-100 p-3 rounded-xl mb-3">
+      <div>
+        <strong>✅ Valid examples:</strong>
+        <div className="font-mono text-emerald-600 text-sm mt-1">TXN123456789</div>
+        <div className="font-mono text-emerald-600 text-sm">20250110T123456</div>
+      </div>
+      <div>
+        <strong>❌ Invalid:</strong>
+        <div className="font-mono text-red-600 text-sm mt-1">123456</div>
+        <div className="font-mono text-red-600 text-sm">upi payment</div>
+      </div>
+    </div>
+  </div>
+  <input
+    type="text"
+    required
+    placeholder="TXN123456789 (Copy from UPI app)"
+    value={formData.upiTransactionId}
+    onChange={(e) => setFormData({...formData, upiTransactionId: e.target.value})}
+    className="w-full p-6 border-3 border-crochet-pink/50 rounded-3xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-200 text-xl font-mono tracking-wider bg-gradient-to-r from-white to-gray-50"
+  />
+</div>
+
 
               <motion.button
                 type="submit"

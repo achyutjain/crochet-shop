@@ -20,6 +20,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/products', productRoutes.default);
 app.use('/api/orders', orderRoutes.default);
 app.use('/api/admin', adminRoutes.default);
+// app.use('/api/orders', require('./routes/orders'));
 
 // MongoDB
 mongoose.connect(process.env.MONGO_URI)
