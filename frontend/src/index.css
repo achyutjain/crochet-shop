@@ -6,3 +6,38 @@
 
 * { font-family: 'Inter', sans-serif; }
 h1, h2, h3 { font-family: 'Dancing Script', cursive; font-weight: 700; }
+.floating-flowers .flower1 {
+  position: absolute; top: 20%; right: 10%; width: 60px; height: 60px; background: radial-gradient(circle, #FFFF00, #FF0000); border-radius: 50% 20% 30% 40%; opacity: 0.6;
+}
+.floating-flowers .flower2 {
+  position: absolute; bottom: 30%; left: 15%; width: 50px; height: 50px; background: radial-gradient(circle, #E6E600, #DDA0ff); border-radius: 40% 60% 30% 20%; opacity: 0.5;
+}
+/* 🎨 CROCHET SHOP BOLD COLORS */
+:root {
+--crochet-pink: #E5989B;     /* Soft coral */
+--crochet-lavender: #B5838D;/* Mauve */
+--crochet-mint: #6D6875;    /* Muted gray-purple */
+--crochet-cream: #FFF1E6;   /* Soft off-white */
+
+
+
+}
+
+/* Tailwind Color Classes */
+.bg-crochet-pink { background-color: var(--crochet-pink); }
+.bg-crochet-lavender { background-color: var(--crochet-lavender); }
+.bg-crochet-mint { background-color: var(--crochet-mint); }
+.bg-crochet-cream { background-color: var(--crochet-cream); }
+
+.text-crochet-pink { color: var(--crochet-pink); }
+.text-crochet-lavender { color: var(--crochet-lavender); }
+.text-crochet-mint { color: var(--crochet-mint); }
+.text-crochet-cream { color: var(--crochet-cream); }
+
+.border-crochet-pink { border-color: var(--crochet-pink); }
+.border-crochet-lavender { border-color: var(--crochet-lavender); }
+.border-crochet-mint { border-color: var(--crochet-mint); }
+
+.from-crochet-pink { --tw-gradient-from: var(--crochet-pink); }
+.to-crochet-lavender { --tw-gradient-to: var(--crochet-lavender); }
+.via-crochet-mint { --tw-gradient-via: var(--crochet-mint); }
