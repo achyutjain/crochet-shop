@@ -13,7 +13,16 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173' }));
+//import cors from 'cors'
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://crochet-shop-seven.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}))
 app.use(express.json({ limit: '10mb' }));
 
 // Routes
