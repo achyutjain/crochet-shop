@@ -22,7 +22,9 @@ export default function App() {
 
         <Header />
         
-        <main className="pt-24 pb-24 relative z-10">
+        {/* <main className="pt-24 pb-24 relative z-10"> */}
+        <main className="pt-28 pb-32 lg:pt-24 lg:pb-24 relative z-10">  {/* ↑ Extra mobile padding */}
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />

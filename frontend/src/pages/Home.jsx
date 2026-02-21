@@ -193,20 +193,20 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            className="flex flex-col sm:flex-row justify-center items-center w-full space-y-4 sm:space-y-0 sm:space-x-6"
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
               <Link 
                 to="/products"
-                className="bg-gradient-to-r from-crochet-pink to-crochet-lavender text-white px-12 py-6 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+                className="block bg-gradient-to-r from-crochet-pink to-crochet-lavender text-white w-full sm:w-auto px-8 sm:px-12 py-6 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl transition-all duration-300 text-center"
               >
                 🛍️ Shop Flowers
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
               <Link 
                 to="/products"
-                className="border-4 border-crochet-pink text-crochet-pink px-12 py-6 rounded-3xl font-bold text-xl hover:bg-crochet-pink hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl"
+                className="block border-4 border-crochet-pink text-crochet-pink w-full sm:w-auto px-8 sm:px-12 py-6 rounded-3xl font-bold text-xl hover:bg-crochet-pink hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl text-center"
               >
                 👀 View Collection
               </Link>
@@ -280,7 +280,7 @@ export default function Home() {
             <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-crochet-pink to-crochet-lavender bg-clip-text text-transparent mb-8">
               Our Story
             </h2>
-            <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               
               {/* Creator Image */}
               <motion.div 
@@ -288,7 +288,7 @@ export default function Home() {
                 whileInView={{ scale: 1, rotate: 0 }}
                 className="relative"
               >
-                <div className="w-96 h-96 rounded-3xl bg-gradient-to-br from-crochet-pink/20 to-crochet-lavender/20 border-8 border-white shadow-2xl mx-auto relative overflow-hidden">
+                  <div className="w-full aspect-square max-w-[300px] lg:w-96 lg:h-96 rounded-3xl bg-gradient-to-br from-crochet-pink/20 to-crochet-lavender/20 border-8 border-white shadow-2xl relative overflow-hidden mx-auto">                  
                   <img 
                     src="https://images.unsplash.com/photo-1434389677669-e08b4cac3107?w=400&fit=crop&crop=face" 
                     alt="Priya - CrochetBloom Creator"
